@@ -100,7 +100,7 @@ Payload:
 
 Response:
 {
-  "vpc_id": "vpc-123456",
+  "vpc_id": "vpc-*****",
   "cidr_block": "10.0.0.0/16",
   "subnets": ["subnet-abc", "subnet-def", "subnet-ghi"]
 }
@@ -111,7 +111,7 @@ Returns a list of all created VPCs.
 
 [
   {
-    "vpc_id": "vpc-123456",
+    "vpc_id": "vpc-*****",
     "cidr_block": "10.0.0.0/16",
     "subnets": ["subnet-abc", "subnet-def"]
   }
