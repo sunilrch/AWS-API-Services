@@ -55,7 +55,7 @@ This project uses the following AWS services:
 
 4. Install boto3 package 
 
-pip install boto3
+   pip install boto3
 
 
 5. Deploy Lambdas ( via SAM template)
