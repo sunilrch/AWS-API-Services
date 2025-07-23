@@ -29,13 +29,14 @@ This project uses the following AWS services:
 ##  Project Structure
 
 
-.vpc-api-iam
+.vpc-api-iam/
 ├── src/
-│ ├── create_vpc.py # Lambda function for creating VPC and subnets
-│ ├── get_vpc.py # Lambda function for getting a single VPC by ID
-├── template.yaml # SAM/CloudFormation template 
-├── requirements.txt
-└── README.md
+│   ├── create_vpc.py     # Lambda function to create VPCs and subnets
+│   ├── get_vpc.py        # Lambda function to retrieve a specific VPC by ID
+├── template.yaml         # AWS SAM or CloudFormation template
+├── requirements.txt      # Python dependencies for Lambda
+└── README.md             # Project documentation
+
 
 ** Please not that the samconfig.toml will get auto created once you deploy the template using SAM CLI
 ** The sam template template.yaml will provsion all the necessary serverless services on aws
