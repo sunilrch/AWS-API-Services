@@ -38,7 +38,7 @@ This project uses the following AWS services:
 └── README.md
 
 ** Please not that the samconfig.toml will get auto created once you deploy the template using SAM CLI
-** The sam template template.yaml will provsion all the necessary serverless services on aws
+** The sam template template.yaml will provision all the necessary serverless services on aws
 
 ---
 
