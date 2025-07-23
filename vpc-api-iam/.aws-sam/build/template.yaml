@@ -1,0 +1,71 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Globals:
+  Function:
+    Runtime: python3.13
+    Timeout: 10
+Resources:
+  VpcTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+      - AttributeName: vpc_id
+        AttributeType: S
+      KeySchema:
+      - AttributeName: vpc_id
+        KeyType: HASH
+      BillingMode: PAY_PER_REQUEST
+  VpcApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      Name: VpcApi
+      StageName: Prod
+      Auth:
+        DefaultAuthorizer: AWS_IAM
+  CreateVpcFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/create_vpc.lambda_handler
+      CodeUri: CreateVpcFunction
+      Environment:
+        Variables:
+          DDB_TABLE:
+            Ref: VpcTable
+      Events:
+        CreateVpc:
+          Type: Api
+          Properties:
+            RestApiId:
+              Ref: VpcApi
+            Path: /vpcs
+            Method: post
+      Policies:
+      - AmazonEC2FullAccess
+      - DynamoDBCrudPolicy:
+          TableName:
+            Ref: VpcTable
+    Metadata:
+      SamResourceId: CreateVpcFunction
+  GetVpcsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/get_vpcs.lambda_handler
+      CodeUri: GetVpcsFunction
+      Environment:
+        Variables:
+          DDB_TABLE:
+            Ref: VpcTable
+      Events:
+        GetVpcs:
+          Type: Api
+          Properties:
+            RestApiId:
+              Ref: VpcApi
+            Path: /vpcs
+            Method: get
+      Policies:
+      - DynamoDBReadPolicy:
+          TableName:
+            Ref: VpcTable
+    Metadata:
+      SamResourceId: GetVpcsFunction
